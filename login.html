@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Login Admin - AFFILINK SHOWCASE</title>
+  <meta name="description" content="Halaman login administrator AFFILINK SHOWCASE." />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --primary: #ee4d2d;
+      --primary-hover: #d73211;
+      --primary-light: #fff5f1;
+      --secondary: #0f172a;
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --success: #10b981;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    @media (min-width: 640px) {
+      body {
+        background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+      }
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .icon-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i.prefix-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 40px 11px 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--background);
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0;
+    }
+
+    .toggle-password:hover {
+      color: var(--text);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+      margin-top: 10px;
+    }
+
+    .btn-login:hover:not(:disabled) {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .alert-box {
+      display: none;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      margin-bottom: 18px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert-box.error {
+      display: flex;
+      background: var(--danger-light);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+
+    .alert-box.success {
+      display: flex;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Helper info credentials box */
+    .credentials-hint {
+      margin-top: 24px;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      background: var(--background);
+      border: 1px dashed var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .credentials-hint strong {
+      color: var(--text);
+    }
+
+    .credentials-hint code {
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--secondary);
+      font-family: monospace;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <a href="index.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Kembali ke Showcase</span>
+    </a>
+
+    <div class="login-header">
+      <div class="icon-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h1 class="login-title">Admin Dashboard</h1>
+      <p class="login-subtitle">Masuk untuk mengelola katalog produk affiliate</p>
+    </div>
+
+    <!-- Alert Notification -->
+    <div id="alertBox" class="alert-box">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="alertMessage">Username atau password salah</span>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="usernameInput" class="form-label">Username</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-user prefix-icon"></i>
+          <input 
+            type="text" 
+            id="usernameInput" 
+            class="form-input" 
+            placeholder="Masukkan username" 
+            required 
+            autocomplete="username"
+            value="admin"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordInput" class="form-label">Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock prefix-icon"></i>
+          <input 
+            type="password" 
+            id="passwordInput" 
+            class="form-input" 
+            placeholder="Masukkan password" 
+            required 
+            autocomplete="current-password"
+            value="admin123"
+          />
+          <button type="button" id="togglePasswordBtn" class="toggle-password" title="Lihat/Sembunyikan Password">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn-login">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Masuk ke Dashboard</span>
+      </button>
+    </form>
+
+    <!-- Credential Hint -->
+    <div class="credentials-hint">
+      <p><i class="fa-solid fa-circle-info" style="color:var(--primary); margin-right:4px;"></i> <strong>Akun Default:</strong></p>
+      <div style="margin-top:4px;">
+        Username: <code>admin</code> &bull; Password: <code>admin123</code>
+      </div>
+      <div style="margin-top:4px; font-size:11px; color:#94a3b8;">
+        (Username dan password dapat diubah nanti di Pengaturan Sistem Dashboard)
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Config & API Helper -->
+  <script src="config.js"></script>
+
+  <script>
+    (function() {
+      // Periksa apakah sudah ada session login aktif
+      const existingToken = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+      if (existingToken) {
+        window.location.href = "dashboard.html";
+      }
+
+      const loginForm = document.getElementById("loginForm");
+      const usernameInput = document.getElementById("usernameInput");
+      const passwordInput = document.getElementById("passwordInput");
+      const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const alertBox = document.getElementById("alertBox");
+      const alertMessage = document.getElementById("alertMessage");
+
+      // Toggle lihat password
+      togglePasswordBtn.addEventListener("click", () => {
+        const isPassword = passwordInput.getAttribute("type") === "password";
+        passwordInput.setAttribute("type", isPassword ? "text" : "password");
+        togglePasswordBtn.innerHTML = isPassword 
+          ? '<i class="fa-regular fa-eye-slash"></i>' 
+          : '<i class="fa-regular fa-eye"></i>';
+      });
+
+      // Submit form login
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        showAlert(false);
+        setLoading(true);
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+
+        try {
+          const res = await window.AffilinkAPI.request("login", {
+            username: username,
+            password: password
+          }, "POST");
+
+          if (res && res.success && res.data && res.data.token) {
+            // Simpan token & user ke LocalStorage
+            localStorage.setItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN, res.data.token);
+            localStorage.setItem(CONFIG.STORAGE_KEYS.USER_DATA, JSON.stringify({
+              username: res.data.username || username,
+              loggedInAt: new Date().toISOString()
+            }));
+
+            showAlert(true, "Login berhasil! Mengalihkan ke dashboard...", true);
+            
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 600);
+          } else {
+            showAlert(true, (res && res.message) ? res.message : "Username atau password salah.");
+            setLoading(false);
+          }
+        } catch (err) {
+          console.error("Login error:", err);
+          showAlert(true, "Terjadi gangguan koneksi ke server. Silakan coba lagi.");
+          setLoading(false);
+        }
+      });
+
+      function showAlert(show, msg = "", isSuccess = false) {
+        if (!show) {
+          alertBox.style.display = "none";
+          return;
+        }
+        alertBox.className = "alert-box " + (isSuccess ? "success" : "error");
+        alertBox.querySelector("i").className = isSuccess 
+          ? "fa-solid fa-circle-check" 
+          : "fa-solid fa-circle-exclamation";
+        alertMessage.textContent = msg;
+        alertBox.style.display = "flex";
+      }
+
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        if (isLoading) {
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Memproses...</span>';
+        } else {
+          submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> <span>Masuk ke Dashboard</span>';
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
